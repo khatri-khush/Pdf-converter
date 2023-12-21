@@ -11,3 +11,44 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.al{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:40px;
+}
+.dragNdrop{
+  border:1px dashed gray;
+  border-radius: 8px;
+  padding: 0px 20px;
+}
+
+.downloadPDF{
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #4f36f1;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  box-shadow: 0 9px #999;
+}
+
+.downloadPDF:hover {background-color: #4f36f1}
+
+.downloadPDF:active {
+  background-color: #4f36f1;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}

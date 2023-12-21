@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import FileUpload from './FileUpload';
 
-function App() {
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
+
+
+const App = () => {
+  const [files, setFiles] = useState([]);
+
+
+  const generatePDF = async (files) => {
+    const doc = new jsPDF();
+
+    for (const file of files) {
+      const imgData = await html2canvas(document.querySelector(`img[src="${file.preview}"]`));
+      doc.addImage(imgData.toDataURL('image/png'), 'PNG', 0, 0);
+      doc.addPage();
+    }
+
+    doc.save('my-pdf.pdf');
+  };
+
+  const handleFilesSelected = (selectedFiles) => {
+    setFiles(selectedFiles);
+  };
+
+  const handlePDFDownload = () => {
+    generatePDF(files);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='al'>
+      <FileUpload onFilesSelected={handleFilesSelected} />
+      <div className='downloadPDF' onClick={handlePDFDownload}>Download PDF</div>
     </div>
   );
-}
+};
 
 export default App;
